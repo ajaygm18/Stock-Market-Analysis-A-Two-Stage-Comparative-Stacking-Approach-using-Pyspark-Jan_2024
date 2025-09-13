@@ -1,0 +1,205 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PredicatorFinc.</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/footer-distributed-with-address-and-phones.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Lato", sans-serif
+        }
+
+        .w3-bar,
+        h1,
+        button {
+            font-family: "Montserrat", sans-serif
+        }
+
+        .fa-anchor,
+        .fa-coffee {
+            font-size: 200px
+        }
+
+        /* Additional styles for your dropdown */
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        /* Additional styles for the form */
+        #stockPredictionForm {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .w3-row-padding {
+            margin-bottom: 20px;
+        }
+
+        .w3-half {
+            width: 48%;
+            margin-right: 4%;
+            float: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body id="bod">
+    <!-- Navbar -->
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card w3-left-align w3-large">
+            <!-- Your existing navigation bar code here -->
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="w3-container w3-black w3-center" style="padding:128px 16px">
+        <h1 class="w3-margin w3-jumbo">Stock Prediction Zone</h1>
+    </header>
+
+    <!-- Form Section -->
+    <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+        <div class="w3-content">
+            <form id="stockPredictionForm" action="predict.php" method="post">
+                <div class="w3-row-padding">
+                    <div class="w3-half">
+                        <label for="open">Open Price:</label>
+                        <input type="text" id="open" name="open" placeholder="Enter open price" required>
+                    </div>
+                    <div class="w3-half">
+                        <label for="high">High Price:</label>
+                        <input type="text" id="high" name="high" placeholder="Enter high price" required>
+                    </div>
+                </div>
+
+                <div class="w3-row-padding">
+                    <div class="w3-half">
+                        <label for="low">Low Price:</label>
+                        <input type="text" id="low" name="low" placeholder="Enter low price" required>
+                    </div>
+                </div>
+
+                <div class="w3-row-padding">
+                    <button type="submit" name="runPrediction" class="w3-button w3-black w3-padding-large w3-hover-white">Run Stock Prediction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Display Predicted Value Section -->
+    <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container" id="predictedValueSection" style="display: none;">
+        <div class="w3-content">
+            <h2>Predicted Value:</h2>
+            <p id="predictedValue"></p>
+        </div>
+    </div>
+
+    <script>
+    // Show the predicted value section when the form is submitted
+    document.getElementById("stockPredictionForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+
+        // Display the predicted value section
+        document.getElementById("predictedValueSection").style.display = "block";
+
+        // Fetch and display the predicted value
+        fetch("predict.php", {
+            method: "POST",
+            body: new FormData(event.target),
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Update the predicted value in the HTML
+            document.getElementById("predictedValue").innerText = "Predicted Value: " + data;
+        })
+        .catch(error => {
+            console.error("Error fetching predicted value:", error);
+            document.getElementById("predictedValue").innerText = "Error fetching predicted value.";
+        });
+    });
+</script>
+
+</body>
+
+</html>
