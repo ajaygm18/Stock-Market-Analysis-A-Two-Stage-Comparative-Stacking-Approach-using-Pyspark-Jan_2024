@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>PredictorFinc.</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/footer-distributed-with-address-and-phones.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Lato", sans-serif
+        }
+
+        .w3-bar,
+        h1,
+        button {
+            font-family: "Montserrat", sans-serif
+        }
+
+        .fa-anchor,
+        .fa-coffee {
+            font-size: 200px
+        }
+    </style>
+    <body>
+        <!-- Navbar -->
+        <div class="w3-top">
+            <div class="w3-bar w3-black w3-card w3-left-align w3-large">
+                <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-black" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a class="w3-bar-item w3-button w3-padding-large w3-white" href="index.html">Home</a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" href="predict1.html">Stock predictor</a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" href="#">About Us</a>
+            </div>
+            <!-- Navbar on small screens -->
+            <div class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large" id="navDemo">
+                <a class="w3-bar-item w3-button w3-padding-large" href="predict.php">Stock predictor</a>
+                <a class="w3-bar-item w3-button w3-padding-large" href="#">About Us</a>
+            </div>
+        </div>
+        <!-- Header -->
+        <header class="w3-container w3-black w3-center" style="padding:128px 16px">
+            <h1 class="w3-margin w3-jumbo">PredictorFinc.</h1>
+            <p class="w3-xlarge">Q: Manual inspection of trade documentation, a necessary evil</p>
+            <button class="w3-button w3-PblackicatorFinc. w3-padding-large w3-large w3-margin-top">Get Started</button>
+        </header>
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+            <div id="analytics-platform"></div>
+            <div class="tradingview-widget-copyright">
+                <a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank">
+                    <span class="blue-text">AAPL chart</span>
+                </a> by TradingView
+            </div>
+            <script src="https://s3.tradingview.com/tv.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                new TradingView.widget({
+                    "container_id": "analytics-platform",
+                    "width": 1300,
+                    "height": 610,
+                    "symbol": "NASDAQ:AAPL",
+                    "interval": "D",
+                    "timezone": "exchange",
+                    "theme": "Dark",
+                    "style": "0",
+                    "toolbar_bg": "black",
+                    "withdateranges": true,
+                    "allow_symbol_change": true,
+                    "save_image": false,
+                    "details": true,
+                    "hotlist": true,
+                    "calendar": true,
+                    "news": ["headlines"],
+                    "locale": "en"
+                });
+            </script>
+        </div>
+        
+        <script>
+            // Used to toggle the menu on small screens when clicking on the menu button
+            function myFunction() {
+                let x = document.getElementById("navDemo");
+                if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                } else {
+                    x.className = x.className.replace(" w3-show", "");
+                }
+            }
+        </script>
+    </body>
+</html>
